@@ -19,7 +19,7 @@ public class Perfect {
 		st = st.substring(0, st.length()-2);
 
 		if(num == divisor_sum){
-			System.out.print(num + " is a perfect number since " + num + " =  " + st);
+			System.out.print(num + " is a perfect number since " + num + " = " + st);
 		}
 
 		else{
