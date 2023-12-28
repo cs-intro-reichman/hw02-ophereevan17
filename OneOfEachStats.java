@@ -10,20 +10,74 @@ import java.util.Random;
 public class OneOfEachStats {
 	public static void main (String[] args) {
 		// Gets the two command-line arguments
+
+		// Initailizes a random numbers generator with the given seed value
+ 
+		
 		int T = Integer.parseInt(args[0]);
 		int seed = Integer.parseInt(args[1]);
-		// Initailizes a random numbers generator with the given seed value
-        Random generator = new Random(seed);  
+
+		Random Generator = new Random(seed);
+
+		int b = 0;
+		int g = 0;
+		double total = 0; //will receive total num of children from all iterations
+
+		boolean boy = false;
+		boolean girl = false; 
+		double rnd = 0;
+		int count2 = 0;
+		int count3 = 0;
+		int count4ormore = 0;
+		String common = "";
+
+		for (int i = 0; i < T; i++){
+
+			while (boy == false || girl == false){
+
+				rnd = Generator.nextDouble(); //This statement will generate a random value in the range [0,1)
+			
+				
+				
+				if (rnd > 0.5){
+					girl = true;
+					g = g + 1;
+				}
+				else{
+					boy = true;
+					b = b + 1;
+
+				}
+			}
+			if (b + g == 2){
+				count2 ++;;
+			} 
+			else if (b + g == 3){
+				count3 ++;
+			}
+			else{
+				count4ormore ++;
+			}
+			total = total + g + b;  //add children received in last 
+			g = 0;  //clean g for next iteration
+			b = 0; //clean g for next iteration
+			girl = false;
+			boy = false;
+			}
+			
 		
-		//// In the previous version of this program, you used a statement like:
-		//// double rnd = Math.random();
-		//// Where "rnd" is the variable that stores the generated random value.
-		//// In this version of the program, replace this statement with:
-		//// double rnd = generator.nextDouble();
-		//// This statement will generate a random value in the range [0,1),
-		//// just like you had in the previous version, except that the 
-		//// randomization will be based on the given seed.
-		//// This is the only change that you have to do in the program.
-		    
+		if ((count2 > count3) && (count2 > count4ormore)) common = "2."; //most common is 2 families
+		else if ((count3 > count2) && (count3 > count4ormore)) common = "3." ; //most common is 3 families
+		else common = "4 or more."; //most common is 4 or more families
+
+		double avg = (double)(total) / T; // total children divised by number of iterations
+		
+		System.out.println("Average " + avg + " children to get at least one of each gender");
+		System.out.println("Number of families with 2 children: " + count2);
+		System.out.println("Number of families with 3 children: " + count3);
+		System.out.println("Number of families with 4 or more children: " + count4ormore);
+		System.out.println("The most common number of children is " + common );
 	}
+	
 }
+
